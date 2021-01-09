@@ -5,7 +5,6 @@ using UnityEngine;
 public class FlyState : State
 {
     private GameObject gameBlock;
-    private GameManager gameManager;
 
     public FlyState(Player player, StateMachine stateMachine) : base(player, stateMachine)
     {
@@ -15,7 +14,6 @@ public class FlyState : State
     {
         base.Enter();
         gameBlock = player.GameBlock;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     public override void HandleInput()
     {
@@ -30,7 +28,7 @@ public class FlyState : State
         }
         if (gameBlock.transform.position.y <= 355) 
         {
-            gameManager.GameOver();
+            GameManager.Instance.GameOver();
             stateMachine.ChangeState(player.Transition);
         }
     }
